@@ -15,18 +15,16 @@ const App = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/resume', formData, {
-        responseType: 'blob', // Important to handle binary data
+      const response = await axios.post('http://localhost:5000/api/resume', formData, {
+        responseType: 'blob',
       });
-
-      // Create a blob from the PDF response
       const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
-
-      // Use file-saver to save the PDF
-      saveAs(pdfBlob, 'resume.pdf');
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(pdfBlob);
+      link.download = 'resume.pdf';
+      link.click();
     } catch (error) {
-      // Handle error
-      console.error(error);
+      console.error('Error generating resume:', error);
     }
   };
 
