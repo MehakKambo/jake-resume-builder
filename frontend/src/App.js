@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PersonalInfoForm from './components/PersonalInfoForm';
 import axios from 'axios';
-import { saveAs } from 'file-saver';
 import { Button } from '@mui/material';
 
 const App = () => {
